@@ -1,0 +1,48 @@
+a {
+  text-decoration: none;
+  color: black;
+}
+.card {
+  border-radius: 25px;
+  position: relative;
+  padding: 25px 25px;
+  background-color: #d67744;
+  margin: 25px auto;
+  height: auto;
+  max-width: 330px;
+  min-width: 320px;
+  box-shadow: 0 2px 5px #ccc;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.img {
+  height: 180px;
+  border-radius: 10%;
+  margin-right: 25px;
+  cursor: pointer;
+}
+/* 
+.btn {
+  border-radius: 6px;
+  padding: 5px;
+}
+ */
+
+
+.badge {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  padding: 6px;
+  margin-right: 5px;
+  float: right;
+}
+.info{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.heading{
+  border-bottom: 2px solid black
+}
