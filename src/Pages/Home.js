@@ -6,8 +6,10 @@ import homeCss from "../styles/home.module.css";
 const Home = () => {
   const [input, setInput] = useState("");
   const [recipies, setRecipies] = useState([]);
-  // recepies in favourites
-  // localStorage.removeItem('dish');
+  let dishes = JSON.parse(localStorage.getItem("dish"));
+  let [dish,setDishes] = useState(dishes);
+  // localStorage.removeItem('dish')
+  // console.log(dish);
   useEffect(() => {
     if (input === "") {
       return;
@@ -23,11 +25,34 @@ const Home = () => {
           API.APP_KEY
       );
       const data = await response.json();
-      console.log(data.hits);
       setRecipies(data.hits);
     };
     fetchCard();
   }, [input]);
+
+  const addTofav = (id,value) => {
+    console.log("add");
+    if (dish === null) {
+      dish = {};
+      dish[id] = value;
+      setDishes(dish);
+      console.log(dish);
+      localStorage.setItem("dish", JSON.stringify(dish));
+      return;
+    }
+    dish[id] = value;
+    setDishes(dish);
+    console.log(dish);
+    localStorage.setItem("dish", JSON.stringify(dish));
+    console.log(dish);
+  };
+  const removeFromfav = (id,value) => {
+    // console.log("remove");
+    delete dish[id];
+    setDishes(dish);
+    localStorage.setItem("dish", JSON.stringify(dish))
+    // console.log(dish);
+  };
   return (
     <div>
       <h1 id={homeCss.appName}>Recipe Search</h1>
@@ -37,18 +62,18 @@ const Home = () => {
         placeholder="Search a recipe"
         onChange={(e) => setInput(e.target.value)}
       />
-
-      {/* <button onClick={apicall} id="searchButton">
-        Search
-      </button> */}
-      
       
       <div id={homeCss.list}>
         {recipies.map((item) => {
-          return <Card prop={item.recipe}/>;
+          return <Card prop={item.recipe} 
+            dish={dish} 
+            addTofav={addTofav} 
+            removeFromfav={removeFromfav}/>;
         })}
       </div>
+      
     </div>
+    
   );
 };
 
